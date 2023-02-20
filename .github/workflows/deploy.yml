@@ -1,0 +1,29 @@
+name: deploy
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '17'
+      - name: Install Decentraland CLI globally
+        run: npm install -g decentraland@latest
+
+      - name: Install all project dependencies
+        run: npm i
+
+      - name: build
+        run: npm run build
+
+      - name: Deploy the scene
+        env:
+          DCL_PRIVATE_KEY: ${{ secrets.DCL_PRIVATE_KEY }}
+        run: dcl deploy
