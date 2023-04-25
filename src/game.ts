@@ -6,6 +6,7 @@ import { createCoin } from './coin'
 import { Scene } from './scene'
 
 // ads
+// TODO: actually add ads to this scene
 import { createAdBoard } from './ad_board'
 
 const _scene = new Scene()
